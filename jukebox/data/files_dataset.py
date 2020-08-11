@@ -75,7 +75,8 @@ class FilesAudioDataset(Dataset):
             example, ("unknown", "classical", "") could be a metadata for a
             piano piece.
         """
-        return None, None, None
+        #return None, None, None
+        return "nina_simone", "Jazz", ""
 
     def get_song_chunk(self, index, offset, test=False):
         filename, total_length = self.files[index], self.durations[index]
