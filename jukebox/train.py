@@ -21,6 +21,8 @@ from jukebox.utils.ema import CPUEMA, FusedEMA, EMA
 from jukebox.utils.fp16 import FP16FusedAdam, FusedAdam, LossScalar, clipped_grad_scale, backward
 from jukebox.data.data_processor import DataProcessor
 
+import datetime
+
 def prepare_aud(x, hps):
     x = audio_postprocess(x.detach().contiguous(), hps)
     return allgather(x)
@@ -292,6 +294,8 @@ def train(model, orig_model, opt, shd, scalar, ema, logger, metrics, data_proces
     return {key: metrics.avg(key) for key in _metrics.keys()}
 
 def run(hps="teeny", port=29500, **kwargs):
+    print(datetime.datetime.now(), " train/run started!")
+
     from jukebox.utils.dist_utils import setup_dist_from_mpi
     rank, local_rank, device = setup_dist_from_mpi(port=port)
     hps = setup_hparams(hps, kwargs)
@@ -322,6 +326,8 @@ def run(hps="teeny", port=29500, **kwargs):
 
     # Run training, eval, sample
     for epoch in range(hps.curr_epoch, hps.epochs):
+        print(datetime.datetime.now(), " epoch=", epoch)
+
         metrics.reset()
         data_processor.set_epoch(epoch)
         if hps.train:
