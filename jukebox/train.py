@@ -324,6 +324,8 @@ def run(hps="teeny", port=29500, **kwargs):
     logger, metrics = init_logging(hps, local_rank, rank)
     logger.iters = model.step
 
+    print("epoch length=", len(range(hps.curr_epoch, hps.epochs)))
+    
     # Run training, eval, sample
     for epoch in range(hps.curr_epoch, hps.epochs):
         print(datetime.datetime.now(), " epoch=", epoch)
