@@ -325,7 +325,7 @@ def run(hps="teeny", port=29500, **kwargs):
     logger.iters = model.step
 
     # 100でおよそ7時間弱
-    hps.epochs = 10
+    hps.epochs = 200
     print("epoch length=", len(range(hps.curr_epoch, hps.epochs)))
 
     # Run training, eval, sample

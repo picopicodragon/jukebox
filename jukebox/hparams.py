@@ -214,7 +214,6 @@ small_prior = Hyperparams(
     attn_order=2,
     blocks=64,
     init_scale=0.7,
-    restore_prior='/content/gdrive/My Drive/logData/small_vqvae/checkpoint_step_1.pth.tar',
 )
 HPARAMS_REGISTRY["small_prior"] = small_prior
 
