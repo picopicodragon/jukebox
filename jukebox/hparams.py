@@ -563,3 +563,33 @@ DEFAULTS["audio"] = Hyperparams(
 DEFAULTS["distributed"] = Hyperparams(
     bucket=128
 )
+
+
+# My Model hps =======================================================================
+my_small_vqvae = Hyperparams(
+    restore_vqvae='/content/gdrive/My Drive/logData/small_vqvae/checkpoint_step_1.pth.tar',
+)
+my_small_vqvae.update(small_vqvae)
+HPARAMS_REGISTRY["my_small_vqvae"] = my_small_vqvae
+
+my_small_prior = Hyperparams(
+    restore_prior='/content/gdrive/My Drive/logData/small_prior/checkpoint_latest.pth.tar',
+    level=1,
+    labels=False,
+    # TODO For the two lines below, if `--labels` was used and the model is
+    # trained with lyrics, find and enter the layer, head pair that has learned
+    # alignment.
+    alignment_layer=47,
+    alignment_head=0,
+)
+my_small_prior.update(small_prior)
+HPARAMS_REGISTRY["my_small_prior"] = my_small_prior
+
+my_small_upsampler = Hyperparams(
+    restore_prior='/content/gdrive/My Drive/logData/small_upsampler/checkpoint_latest.pth.tar',
+    level=0,
+    labels=False,
+)
+my_small_upsampler.update(small_upsampler)
+HPARAMS_REGISTRY["my_small_upsampler"] = my_small_upsampler
+#======================================================================================
