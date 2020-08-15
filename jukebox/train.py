@@ -327,7 +327,7 @@ def run(hps="teeny", port=29500, **kwargs):
     # VQVAEでは100でおよそ7時間弱
     # priorでは100でおよそ3時間
     # upsamplerでは100でおよそ21時間
-    hps.epochs = 50
+    hps.epochs = 100
     print("epoch length=", len(range(hps.curr_epoch, hps.epochs)))
 
     # Run training, eval, sample
