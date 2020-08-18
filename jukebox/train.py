@@ -334,10 +334,10 @@ def run(hps="teeny", port=29500, **kwargs):
     print("user_epochs=", hps.user_epochs)
     print("user_curr_epoch=", hps.user_curr_epoch)
 
-    hps.epochs = 10
+    hps.epochs = hps.user_epochs
 
     # curr_epochは開始index 前回終了の次のindexを指定 ※初期値は-1
-    hps.curr_epoch = -1
+    hps.curr_epoch = hps.user_curr_epoch
     print("start epoch=", hps.curr_epoch)
     print("end epoch=", hps.epochs)
     print("epoch length=", len(range(hps.curr_epoch, hps.epochs)))
