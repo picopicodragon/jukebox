@@ -307,6 +307,10 @@ def run(hps="teeny", port=29500, **kwargs):
     # Setup dataset
     data_processor = DataProcessor(hps)
 
+    # 手直し=======================================================================
+    #======================================================================================
+
+
     # Setup models
     vqvae = make_vqvae(hps, device)
     print_once(f"Parameters VQVAE:{count_parameters(vqvae)}")
@@ -343,8 +347,7 @@ def run(hps="teeny", port=29500, **kwargs):
     #file_path = "/content/gdrive/My Drive/my_model/small_vqvae/checkpoint_step_1.pth.tar"
     #if os.path.exists(local_path):
     #    shutil.copyfile(file_path, )
-    for pm in hps:
-        print(pm, pm.values())
+
     #======================================================================================
 
     # Run training, eval, sample

@@ -79,7 +79,10 @@ def restore_opt(opt, shd, checkpoint_path):
 
 def make_vqvae(hps, device='cuda'):
     print("make_vqvae!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    print("hps.restore_vqvae=", hps.restore_vqvae)
+    print("make_vqvae!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    rv = hps.restore_vqvae
+    print("hps.restore_vqvae=", rv)
+    print("rv==============================")
     from jukebox.vqvae.vqvae import VQVAE
     block_kwargs = dict(width=hps.width, depth=hps.depth, m_conv=hps.m_conv,
                         dilation_growth_rate=hps.dilation_growth_rate,
