@@ -27,10 +27,15 @@ MODELS = {
 
 def load_checkpoint(path):
     restore = path
+    print('os.path.expanduser("~/.cache")=', os.path.expanduser("~/.cache"))
     print(path)
     if restore[:5] == 'gs://':
         gs_path = restore
         local_path = os.path.join(os.path.expanduser("~/.cache"), gs_path[5:])
+        # 手直し===============================================================================
+    elif restore[:16] == '/content/gdrive/':
+
+        #======================================================================================
         if dist.get_rank() % 8 == 0:
             print("Downloading from gce")
             if not os.path.exists(os.path.dirname(local_path)):
@@ -55,8 +60,6 @@ def save_checkpoint(logger, name, model, opt, metrics, hps):
     return
 
 def restore_model(hps, model, checkpoint_path):
-    print("restore_model!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    print("checkpoint_path=", checkpoint_path)
     model.step = 0
     if checkpoint_path != '':
         checkpoint = load_checkpoint(checkpoint_path)
@@ -78,11 +81,6 @@ def restore_opt(opt, shd, checkpoint_path):
         shd.step(checkpoint['step'])
 
 def make_vqvae(hps, device='cuda'):
-    print("make_vqvae!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    print("make_vqvae!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    rv = hps.restore_vqvae
-    print("hps.restore_vqvae=", rv)
-    print("rv==============================")
     from jukebox.vqvae.vqvae import VQVAE
     block_kwargs = dict(width=hps.width, depth=hps.depth, m_conv=hps.m_conv,
                         dilation_growth_rate=hps.dilation_growth_rate,
