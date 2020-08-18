@@ -6,6 +6,7 @@ Then from maestros
 import sys
 import fire
 import warnings
+import shutil
 import numpy as np
 import torch as t
 import jukebox.utils.dist_adapter as dist
@@ -337,11 +338,21 @@ def run(hps="teeny", port=29500, **kwargs):
     print("start epoch=", hps.curr_epoch)
     print("end epoch=", hps.epochs)
     print("epoch length=", len(range(hps.curr_epoch, hps.epochs)))
+
+    # file移動
+    #file_path = "/content/gdrive/My Drive/my_model/small_vqvae/checkpoint_step_1.pth.tar"
+    #if os.path.exists(local_path):
+    #    shutil.copyfile(file_path, )
+
     #======================================================================================
 
     # Run training, eval, sample
     for epoch in range(hps.curr_epoch, hps.epochs):
         print(datetime.datetime.now(), " epoch=", epoch)
+
+        for pm in hps:
+            print(pm, pm.values())
+
 
         metrics.reset()
         data_processor.set_epoch(epoch)
