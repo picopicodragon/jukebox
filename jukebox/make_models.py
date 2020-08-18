@@ -27,6 +27,7 @@ MODELS = {
 
 def load_checkpoint(path):
     restore = path
+    print(path)
     if restore[:5] == 'gs://':
         gs_path = restore
         local_path = os.path.join(os.path.expanduser("~/.cache"), gs_path[5:])
