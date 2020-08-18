@@ -79,7 +79,7 @@ def restore_opt(opt, shd, checkpoint_path):
 
 def make_vqvae(hps, device='cuda'):
     print("make_vqvae!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    print(f"{hps.restore_vqvae}")
+    print("hps.restore_vqvae=", hps.restore_vqvae)
     from jukebox.vqvae.vqvae import VQVAE
     block_kwargs = dict(width=hps.width, depth=hps.depth, m_conv=hps.m_conv,
                         dilation_growth_rate=hps.dilation_growth_rate,
@@ -101,6 +101,7 @@ def make_vqvae(hps, device='cuda'):
                   **block_kwargs)
 
     vqvae = vqvae.to(device)
+    print("next is restore_model()!")
     restore_model(hps, vqvae, hps.restore_vqvae)
     if hps.train and not hps.prior:
         print_all(f"Loading vqvae in train mode")
