@@ -307,10 +307,6 @@ def run(hps="teeny", port=29500, **kwargs):
     # Setup dataset
     data_processor = DataProcessor(hps)
 
-    # 手直し=======================================================================
-    #======================================================================================
-
-
     # Setup models
     vqvae = make_vqvae(hps, device)
     print_once(f"Parameters VQVAE:{count_parameters(vqvae)}")
@@ -335,6 +331,9 @@ def run(hps="teeny", port=29500, **kwargs):
     # upsamplerでは100でおよそ21時間
 
     # hps.epochsは終了index 初期値は10,000
+    print("user_epochs=", hps.user_epochs)
+    print("user_curr_epoch=", hps.user_curr_epoch)
+
     hps.epochs = 10
 
     # curr_epochは開始index 前回終了の次のindexを指定 ※初期値は-1
