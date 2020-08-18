@@ -384,8 +384,10 @@ DEFAULTS["vqvae"] = Hyperparams(
     lmix_l2=0.0,
     lmix_linf=0.0,
     use_bottleneck=True,
+    # 手直し=======================================================================
     user_epochs=10000,
     user_curr_epoch=-1,
+    #======================================================================================
 )
 
 DEFAULTS["vqvae_conv_block"] = Hyperparams(

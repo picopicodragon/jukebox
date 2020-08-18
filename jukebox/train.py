@@ -331,13 +331,10 @@ def run(hps="teeny", port=29500, **kwargs):
     # upsamplerでは100でおよそ21時間
 
     # hps.epochsは終了index 初期値は10,000
-    print("user_epochs=", hps.user_epochs)
-    print("user_curr_epoch=", hps.user_curr_epoch)
-
     hps.epochs = hps.user_epochs
-
     # curr_epochは開始index 前回終了の次のindexを指定 ※初期値は-1
     hps.curr_epoch = hps.user_curr_epoch
+    
     print("start epoch=", hps.curr_epoch)
     print("end epoch=", hps.epochs)
     print("epoch length=", len(range(hps.curr_epoch, hps.epochs)))
