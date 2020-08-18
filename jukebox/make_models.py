@@ -55,6 +55,8 @@ def save_checkpoint(logger, name, model, opt, metrics, hps):
     return
 
 def restore_model(hps, model, checkpoint_path):
+    print("restore_model!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    print("checkpoint_path=", checkpoint_path)
     model.step = 0
     if checkpoint_path != '':
         checkpoint = load_checkpoint(checkpoint_path)
