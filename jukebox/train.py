@@ -343,16 +343,13 @@ def run(hps="teeny", port=29500, **kwargs):
     #file_path = "/content/gdrive/My Drive/my_model/small_vqvae/checkpoint_step_1.pth.tar"
     #if os.path.exists(local_path):
     #    shutil.copyfile(file_path, )
-
+    for pm in hps:
+        print(pm, pm.values())
     #======================================================================================
 
     # Run training, eval, sample
     for epoch in range(hps.curr_epoch, hps.epochs):
         print(datetime.datetime.now(), " epoch=", epoch)
-
-        for pm in hps:
-            print(pm, pm.values())
-
 
         metrics.reset()
         data_processor.set_epoch(epoch)
