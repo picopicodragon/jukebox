@@ -76,7 +76,10 @@ class FilesAudioDataset(Dataset):
             piano piece.
         """
         #return None, None, None
+        
+        # 手直し===============================================================================
         return "nina_simone", "Jazz", ""
+        #======================================================================================
 
     def get_song_chunk(self, index, offset, test=False):
         filename, total_length = self.files[index], self.durations[index]

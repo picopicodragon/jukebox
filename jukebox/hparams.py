@@ -564,7 +564,7 @@ DEFAULTS["distributed"] = Hyperparams(
     bucket=128
 )
 
-
+# 手直し
 # My Model hps =======================================================================
 my_small_vqvae = Hyperparams(
     restore_vqvae='/content/gdrive/My Drive/logData/small_vqvae/checkpoint_step_1.pth.tar',
