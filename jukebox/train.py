@@ -324,11 +324,20 @@ def run(hps="teeny", port=29500, **kwargs):
     logger, metrics = init_logging(hps, local_rank, rank)
     logger.iters = model.step
 
+    # 手直し=======================================================================
     # VQVAEでは100でおよそ7時間弱
     # priorでは100でおよそ3時間
     # upsamplerでは100でおよそ21時間
-    hps.epochs = 180
+
+    # hps.epochsは終了index 初期値は10,000
+    hps.epochs = 10
+
+    # curr_epochは開始index 前回終了の次のindexを指定 ※初期値は-1
+    hps.curr_epoch = -1
+    print("start epoch=", hps.curr_epoch)
+    print("end epoch=", hps.epochs)
     print("epoch length=", len(range(hps.curr_epoch, hps.epochs)))
+    #======================================================================================
 
     # Run training, eval, sample
     for epoch in range(hps.curr_epoch, hps.epochs):
