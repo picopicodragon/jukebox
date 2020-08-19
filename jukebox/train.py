@@ -326,6 +326,15 @@ def run(hps="teeny", port=29500, **kwargs):
     logger.iters = model.step
 
     # 手直し=======================================================================
+
+    # vqvae_eval trainモードかevalモード判定 trueの場合は学習の続き
+    hps.vqvae_eval = hps.user_vqvae_eval
+    
+    if hps.vqvae_eval:
+        print("vqvae is eval mode.")
+    else:
+        print("vqvae is train mode.")
+
     # VQVAEでは100でおよそ7時間弱
     # priorでは100でおよそ3時間
     # upsamplerでは100でおよそ21時間
@@ -334,7 +343,7 @@ def run(hps="teeny", port=29500, **kwargs):
     hps.epochs = hps.user_epochs
     # curr_epochは開始index 前回終了の次のindexを指定 ※初期値は-1
     hps.curr_epoch = hps.user_curr_epoch
-    
+
     print("start epoch=", hps.curr_epoch)
     print("end epoch=", hps.epochs)
     print("epoch length=", len(range(hps.curr_epoch, hps.epochs)))
