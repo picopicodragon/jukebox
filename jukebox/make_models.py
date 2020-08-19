@@ -99,7 +99,6 @@ def make_vqvae(hps, device='cuda'):
                   **block_kwargs)
 
     vqvae = vqvae.to(device)
-    print("next is restore_model()!")
     restore_model(hps, vqvae, hps.restore_vqvae)
     if hps.train and not hps.prior:
         print_all(f"Loading vqvae in train mode")
@@ -113,7 +112,7 @@ def make_vqvae(hps, device='cuda'):
                 bottleneck.restore_k(num_tokens=num_tokens, threshold=hps.revival_threshold)
                 # 手直し=======================================================================
                 if hps.vqvae_eval:
-                    print_all(f"Loading vqvae in eval mode")
+                    print_all(f"Loading vqvae in eval mode plus.")
                     vqvae.eval()
                     freeze_model(vqvae)
                 #=============================================================================
