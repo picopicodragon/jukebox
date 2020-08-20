@@ -323,10 +323,13 @@ def run(hps="teeny", port=29500, **kwargs):
     else:
         model = vqvae
 
-    # Setup opt, ema and distributed_model.
-    opt, shd, scalar = get_optimizer(model, hps)
-    ema = get_ema(model, hps)
-    distributed_model = get_ddp(model, hps)
+    # 手直し=======================================================================
+    if hps.vqvae_eval == False:
+    #======================================================================================
+        # Setup opt, ema and distributed_model.
+        opt, shd, scalar = get_optimizer(model, hps)
+        ema = get_ema(model, hps)
+        distributed_model = get_ddp(model, hps)
 
     logger, metrics = init_logging(hps, local_rank, rank)
     logger.iters = model.step
