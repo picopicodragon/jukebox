@@ -307,6 +307,12 @@ def run(hps="teeny", port=29500, **kwargs):
     # Setup dataset
     data_processor = DataProcessor(hps)
 
+    # 手直し=======================================================================
+
+    # vqvae_eval trainモードかevalモード判定 trueの場合は学習の続き
+    hps.vqvae_eval = hps.user_vqvae_eval
+    #======================================================================================
+
     # Setup models
     vqvae = make_vqvae(hps, device)
     print_once(f"Parameters VQVAE:{count_parameters(vqvae)}")
@@ -326,9 +332,6 @@ def run(hps="teeny", port=29500, **kwargs):
     logger.iters = model.step
 
     # 手直し=======================================================================
-
-    # vqvae_eval trainモードかevalモード判定 trueの場合は学習の続き
-    hps.vqvae_eval = hps.user_vqvae_eval
     
     if hps.vqvae_eval:
         print("vqvae is eval mode.")
