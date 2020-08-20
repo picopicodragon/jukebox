@@ -105,11 +105,17 @@ def make_vqvae(hps, device='cuda'):
         if hps.restore_vqvae != '':
             print_all("Reseting bottleneck emas")
             for level, bottleneck in enumerate(vqvae.bottleneck.level_blocks):
+                print("A")
                 num_samples = hps.sample_length
+                print("B")
                 downsamples = calculate_strides(hps.strides_t, hps.downs_t)
+                print("C")
                 raw_to_tokens = np.prod(downsamples[:level + 1])
+                print("D")
                 num_tokens = (num_samples // raw_to_tokens) * dist.get_world_size()
+                print("E")
                 bottleneck.restore_k(num_tokens=num_tokens, threshold=hps.revival_threshold)
+                print("F")
                 # 手直し=======================================================================
                 if hps.vqvae_eval:
                     print_all(f"Loading vqvae in eval mode plus.")
