@@ -110,12 +110,13 @@ def make_vqvae(hps, device='cuda'):
                 raw_to_tokens = np.prod(downsamples[:level + 1])
                 num_tokens = (num_samples // raw_to_tokens) * dist.get_world_size()
                 bottleneck.restore_k(num_tokens=num_tokens, threshold=hps.revival_threshold)
-                # 手直し=======================================================================
-                if hps.vqvae_eval:
-                    print_all(f"Loading vqvae in eval mode plus.")
-                    vqvae.eval()
-                    freeze_model(vqvae)
-                #=============================================================================
+
+            # 手直し=======================================================================
+            if hps.vqvae_eval:
+                print_all(f"Loading vqvae in eval mode plus.")
+                vqvae.eval()
+                freeze_model(vqvae)
+            #=============================================================================
     else:
         print_all(f"Loading vqvae in eval mode")
         vqvae.eval()
